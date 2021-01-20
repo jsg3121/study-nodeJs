@@ -2,6 +2,14 @@
 
 var amqp = require("amqplib/callback_api");
 // "amqp://device:device1234@localhost:5672/device"
+
+var args = "info";
+
+// if (args.length == 0) {
+//   console.log("Usage: receive_logs_direct.js [info] [warning] [error]");
+//   process.exit(1);
+// }
+
 amqp.connect(
   {
     protocol: "amqp",
@@ -15,12 +23,13 @@ amqp.connect(
     if (error0) {
       throw error0;
     }
+
     connection.createChannel(function (error1, channel) {
       if (error1) {
         throw error1;
       }
 
-      var queue = "hello";
+      var queue = "이벤트";
 
       channel.assertQueue(queue, {
         durable: false,
@@ -40,6 +49,34 @@ amqp.connect(
           noAck: true,
         }
       );
+
+      let exchange = "all_logs";
+
+      channel.assertExchange(exchange, "direct", {
+        durable: false,
+      });
+
+      channel.assertQueue("test", { exclusive: true }, (error2, q) => {
+        if (error2) {
+          throw error2;
+        }
+
+        channel.bindQueue(q.queue, exchange, args);
+
+        channel.consume(
+          q.queue,
+          (msg) => {
+            console.log(
+              " [x] %s: '%s'",
+              msg.fields.routingKey,
+              msg.content.toString()
+            );
+          },
+          {
+            noAck: true,
+          }
+        );
+      });
     });
   }
 );
