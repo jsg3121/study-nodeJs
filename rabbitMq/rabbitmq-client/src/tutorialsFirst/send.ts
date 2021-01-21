@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-var amqp = require("amqplib/callback_api");
+const amqp = require("amqplib/callback_api");
 
 amqp.connect(
   {
@@ -10,8 +8,8 @@ amqp.connect(
     username: "test1",
     password: "test1",
     vhost: "/",
-  },
-  function (error0, connection) {
+  }, // amqp를 연결하기 위한 접속자 정보와 포트번호
+  function (error0: any, connection: { createChannel: (arg0: (error1: any, channel: any) => void) => void; }) {
     if (error0) {
       throw error0;
     }
