@@ -1,20 +1,20 @@
 import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import cors from 'cors';
 import { buildSchema, Query, Resolver } from 'type-graphql';
-
+import { createConnection } from "typeorm";
 @Resolver()
 class HelloResolver {
   @Query(() => {
     return String;
-  }, { name: "Hello" })
+  }, { nullable: true })
   async hello() {
     return "hello sungyu!!!!";
   }
 }
 
 const main = async () => {
+  await createConnection();
   const schema = await buildSchema({
     resolvers: [HelloResolver],
   });
@@ -23,8 +23,6 @@ const main = async () => {
     schema
   });
   const app = express();
-
-  app.use("*", cors());
 
   server.applyMiddleware({ app, path: '/graphql' });
 
