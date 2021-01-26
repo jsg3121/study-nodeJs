@@ -1,37 +1,18 @@
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import express from "express";
-import { buildSchema, Query, Resolver } from 'type-graphql';
-import "reflect-metadata";
-import { createConnection } from 'typeorm';
+import cors from 'cors';
+import schema from './schema/schema';
 
-@Resolver()
-class HelloResolver {
+const app = express();
+const server = new ApolloServer({
+  schema
+});
 
-  @Query(() => {
-    return String;
-  }, { name: "hello" })
+app.use("*", cors());
 
-  async hello() {
-    return "hello world";
-  }
-}
+server.applyMiddleware({ app, path: '/graphql' });
 
-const main = async () => {
-
-  await createConnection();
-
-  const schema = await buildSchema({
-    resolvers: [HelloResolver]
-  });
-
-  const apolloServer = new ApolloServer({ schema });
-  const app = express();
-  const PORT = 3306;
-  apolloServer.applyMiddleware({ app });
-
-  app.listen(PORT, () => {
-    console.log("server start!");
-  });
-};
-
-main();
+app.listen(
+  4000,
+  (): void => console.log("server start")
+);

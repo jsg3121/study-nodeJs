@@ -5,7 +5,7 @@
   "port": "3306",
   "username": "root",
   "password": "0000",
-  "database": "typegraphql-example",
+  "database": "test",
   "synchronize": true,
   "logging": true,
   "entities": ["src/entity/*.*"]
