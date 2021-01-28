@@ -31,7 +31,7 @@ const main = async () => {
       "A simple type for getting started!!!@@#!@#!@!$"
       hello: String
     }
-  `;
+  `; // gql은 자바스크립트로 GraphQl스키마르 정의하기 위해 사용되는 템플릿 리터럴 태그
 
   const resolvers = {
     Query: {
@@ -41,7 +41,7 @@ const main = async () => {
     }
   };
 
-  const server = new ApolloServer({
+  const server = new ApolloServer({ // GraphQl서버 인스턴스를 만들어주는 생성자
     typeDefs,
     resolvers
   });
