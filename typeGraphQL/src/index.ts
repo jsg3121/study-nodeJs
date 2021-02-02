@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { ApolloServer, gql } from 'apollo-server';
 import { createConnection } from "typeorm";
+import { Query } from 'type-graphql';
 // import express from 'express';
 // import { ApolloServer } from 'apollo-server-express';
 // import { buildSchema } from 'type-graphql';
@@ -48,8 +49,24 @@ const main = async () => {
 
   server.listen().then((url) => {
     console.log(`Hello ${url}`);
+    Query.call(resolvers);
+    console.log(resolvers);
   });
 
+  // fetch('/', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Accept': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     query: `query {
+  //       hello
+  //     }`
+  //   })
+  // }).then(res => {
+  //   console.log(res);
+  // });
 };
 
 main();
