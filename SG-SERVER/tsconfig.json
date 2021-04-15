@@ -38,7 +38,7 @@
 
     // 추가적 옵션
     "skipLibCheck": true, // 정의파일의 타입 확인을 건너 뛸 지 여부
-    "noUncheckedIndexedAccess": true,// 인덱스 시그니쳐 결과에 undefined 포함여부
+    "noUncheckedIndexedAccess": false,// 인덱스 시그니쳐 결과에 undefined 포함여부
 
     // 모듈 해석 옵션
     "moduleResolution": "Node", // 모듈 해석 방법 결정
