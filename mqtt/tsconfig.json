@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // ECMAScript 대상 버전을 지정 (기본값 : ES3) ESNext는 최신 ES제안 기능을 대상
+    // target values = ES3 (default), ES5, ES5, ES6(ES2015), ES2016, ES2017 ... ,ES2020, ESNext
+    "module": "CommonJS", // 모듈을 위한 코드 생성 설정
+    // module values = none, commonjs, amd, system, umd, es2015, es2020, ESNext
+    "lib": [ 
+      "ES2017",
+      "ESNext",
+      "ESNext.AsyncIterable",
+      "DOM"
+    ], // 컴파일에 포함될 라이브러리 파일 목록
+    // lib가 지정되지 않으면 기본리스트가 삽입됨
+    "outDir": "./build", // 해당 디렉토리로 결과 구조를 보냄
+
+    
+    // es7 데코레이터 관련
+    "experimentalDecorators": true, // ES7의 decorators ( '@'를 이용한 어노테이션 기능 )에 대한 지원 여부
+    "emitDecoratorMetadata": true, // decorator를 위한 타입 메타데이터를 내보내는 것에 대한 지원 여부
+
+    "esModuleInterop": true, // 모든 imports에 대한 namespace 생성을 통해 CommonJS와 es module간의 상호 운용성이 생기게할 지 여부
+    // 'allowSyntheticDefaultImports'를 암시적으로 승인
+    // 'allowSyntheticDefaultImports' = default export가 아닌 모듈에서도 default import가 가능하게 할 지 여부
+    // 해당 설정은 코드 추출에 영향은 주지 않고 타입확인에만 영향을 준다.
+
+    // 컴파일 관련
+    "declaration": true, // js 컴파일 빌드시 .d.ts.파일 생성 여부
+    "sourceMap": true, // js 컴파일 빌드시 .map 파일 생성 여부
+
+    // 타입 확인 옵션 및 변수 사용 유무 옵션
+    "strict": true, // 모든 업격한 타입체킹 옵션 활성화 여부
+    "noUnusedLocals": true, // 사용되지 않은 지역 변수에 대한 에러보고 여부
+    "noImplicitAny": false, // any타입으로 구현된 표현식 혹은 정의 에러처리 여부
+    "strictPropertyInitialization": false, // 클래스 값 초기화에 엄격한 확인 여부
+    "noFallthroughCasesInSwitch": true, // switch문에서 fallthrough 케이스에 대한 에러보고 여부
+    "noImplicitReturns": true, // 함수에서 코드의 모든 경로가 값을 반환하지 않을 시 에러보고 여부
+    "noUnusedParameters": true, // 사용되지 않은 파라미터에 대한 에러보고 여부
+
+    // 추가적 옵션
+    "skipLibCheck": true, // 정의파일의 타입 확인을 건너 뛸 지 여부
+    "noUncheckedIndexedAccess": false,// 인덱스 시그니쳐 결과에 undefined 포함여부
+
+    // 모듈 해석 옵션
+    "moduleResolution": "Node", // 모듈 해석 방법 결정
+    // Node.js의 경우 : Node
+    // AMD, System, ES6의 경우 : Classic
+    "baseUrl": ".", // non-absolute한 모듈 이름을 처리할 기준 디렉토리
+    "paths": {
+      "~/*": ["src/*"]
+    }, // baseUrl를 기준으로 불러올 모듈의 위치를 재지정하는 엔트리 시리즈
+    
+    "importsNotUsedAsValues": "preserve" // 타입을 위해서만 사용하는 import를 위한 내보내기 / 검사동작 지정
+    // remove, preserve : 사이드 이펙트를 위해 사용하지 않은 import를 내보낼지 지정
+    // error : 타입을 위해서만 사용하는 import는 import type으로 강제로 작성하게 함
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
